@@ -314,6 +314,7 @@ class TestDictionary(unittest.TestCase):
         dictionary_from_corpus_2 = Dictionary.from_corpus(corpus, id2word=dictionary)
 
         self.assertEqual(dictionary.token2id, dictionary_from_corpus_2.token2id)
+        self.assertEqual(dictionary.id2token, dictionary_from_corpus_2.id2token)
         self.assertEqual(dictionary.dfs, dictionary_from_corpus_2.dfs)
         self.assertEqual(dictionary.num_docs, dictionary_from_corpus_2.num_docs)
         self.assertEqual(dictionary.num_pos, dictionary_from_corpus_2.num_pos)
