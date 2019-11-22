@@ -32,6 +32,7 @@ class TestNmf(unittest.TestCase, basetmtests.TestBaseTopicModel):
             num_topics=2,
             passes=100,
             random_state=42,
+			h_stop_condition=1e-7
         )
 
     def testGenerator(self):
@@ -101,11 +102,12 @@ class TestNmf(unittest.TestCase, basetmtests.TestBaseTopicModel):
         transformed = self.model.get_term_topics(word)
 
         vec = matutils.sparse2full(transformed, 2)
-        expected = [[0.3076869, 0.69231313]]
+        expected = [[0.30723447, 0.69276553]]
 
         # must contain the same values, up to re-ordering
         if os.name == 'nt':  # result is a bit off on Windows machines, relax tolerance in that case
-            self.assertTrue(np.allclose(sorted(vec), sorted(expected), rtol=1e-1))
+            win_expected = [[0.3492566, 0.65074337]]
+            self.assertTrue(np.allclose(vec, win_expected, atol=1e-7))
         else:
             self.assertTrue(np.allclose(sorted(vec), sorted(expected), rtol=1e-2))
 
