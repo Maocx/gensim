@@ -750,9 +750,6 @@ class Dictionary(utils.SaveLoad, Mapping):
         else:
             # id=>word mapping given: simply copy it
             result.token2id = {utils.to_unicode(token): idx for idx, token in iteritems(id2word)}
-
-        result.id2token = utils.revdict(result.token2id)
-
         for idx in itervalues(result.token2id):
             # make sure all token ids have a valid `dfs` entry
             result.dfs[idx] = result.dfs.get(idx, 0)
